@@ -28,6 +28,13 @@ document.forms['register-form'].onsubmit = function(event){
         event.preventDefault();
         return false;
     }
+
+    if(this.email.value.trim() === ""){
+        document.querySelector(".phone-error").innerHTML = "Please enter a phone";
+        document.querySelector(".phone-error").style.display = "block";
+        event.preventDefault();
+        return false;
+    }
     
     if(this.password.value.trim() === ""){
         document.querySelector(".password-error").innerHTML = "Please enter a password";

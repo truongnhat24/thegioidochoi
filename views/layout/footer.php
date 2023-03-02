@@ -9,8 +9,8 @@
 		</div>
   </footer>
 </main>
-<script src="<?php echo RootREL; ?>media/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo LibsREL; ?>bootstrap/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="<?php echo RootREL; ?>media/ckeditor/ckeditor.js"></script>
-<?php echo html_helpers::jsFooter(); ?>
+<?php echo vendor_html_helper::_jsFooter(); ?>
 </body>
 </html>

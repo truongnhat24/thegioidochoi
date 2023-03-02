@@ -1,5 +1,5 @@
 <?php
-class comments_controller extends main_controller
+class comments_controller extends vendor_main_controller
 {
 	protected comment_model $comment;
 	protected like_model $like;

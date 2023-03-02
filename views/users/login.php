@@ -24,7 +24,7 @@
                   $params = (isset($this->record))? array('id'=>$this->record['id']):'';
                 ?>
 
-                <form name="register-form" method="POST" action="<?php echo html_helpers::url(
+                <form name="register-form" method="POST" action="<?php echo vendor_app_util::url(
                     array('ctl'=>'users', 
                           'act'=>'login', 
                           'params'=>$params)); ?>" class="mb-md-5 mt-md-4 pb-5 form-register">
@@ -55,7 +55,7 @@
                   </div>
 
                   <p class="text-center text-muted mt-5 mb-0">Don't have an account? 
-                    <a href="<?php echo html_helpers::url(['ctl'=>'users', 'act'=>'signup']); ?>" class="fw-bold text-body">
+                    <a href="<?php echo vendor_app_util::url(['ctl'=>'users', 'act'=>'signup']); ?>" class="fw-bold text-body">
                       Create an account
                     </a>
                   </p>

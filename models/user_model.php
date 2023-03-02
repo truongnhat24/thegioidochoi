@@ -1,5 +1,5 @@
 <?php
-class user_model extends main_model {
+class user_model extends vendor_frap_model {
 
 	public function __construct()
 	{		

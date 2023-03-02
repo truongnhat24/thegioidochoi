@@ -1,5 +1,5 @@
 <?php
-class staticpages_controller extends main_controller {
+class staticpages_controller extends vendor_main_controller {
 	//public $layout = "errors/";
 	public function index() {
 		$this->display();

@@ -1,5 +1,5 @@
 <?php
-class like_model extends main_model
+class like_model extends vendor_frap_model
 {
 	public function __construct()
 	{
@@ -16,7 +16,7 @@ class like_model extends main_model
 		return mysqli_query($this->con, $query);
 	}
 
-	public function getLikedRecords($user_id, $blog_id, $fields = '*', $options = null) {
+	public function getLikedRecords($user_id, $product_id, $fields = '*', $options = null) {
 		$conditions = '';
 		if (isset($options)) {
 			$conditions .= ' and ' . $options;
@@ -25,7 +25,7 @@ class like_model extends main_model
 		$query = "SELECT $this->table.$fields 
 					FROM $this->table 
 					INNER JOIN comments on $this->table.type_id = comments.id 
-    					WHERE $this->table.user_id = $user_id and comments.blog_id = $blog_id and $this->table.type_id 
+    					WHERE $this->table.user_id = $user_id and comments.product_id = $product_id and $this->table.type_id 
         					IN 
         					(SELECT  $this->table.type_id FROM $this->table WHERE $options)";
 							
