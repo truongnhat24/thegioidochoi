@@ -11,8 +11,10 @@ class vendor_main_controller {
 	protected	$viewfile;
 	protected 	$categories;
 	protected	$products;
+	protected 	$records;
 
 	public function  __construct() {
+		//var_dump("cccccc"); exit();
 		global $app;
 		$this->controller = $app['ctl'];
 		if(isset($app['act'])) $this->action = $app['act'];
@@ -49,9 +51,9 @@ class vendor_main_controller {
 		if(!isset($options['ctl']))		$options['ctl'] = $this->controller;
 		if(!isset($options['act']))		$options['act'] = $this->action;
 		$view = "views/".$options['area'].$options['ctl']."/".$options['act'].".php";
-		if (is_file($view)) 
+		if (is_file($view)) {
 			include_once $view;
-		else {
+		} else {
 			$this->viewfile = $view;
 			include_once "views/".$options['area']."staticpages/missingview.php";
 		}

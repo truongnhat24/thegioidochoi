@@ -19,6 +19,8 @@ define('MediaREL', 'media/');
 define('MediaURI', $relRoot.'media/');
 define('LibsREL', 'media/libs/');
 define('LibsURI', $relRoot.'media/libs/');
+define('VendorREL', 'vendor/');
+define('VendorURI', $relRoot.'vendor/');
 
 define('AdminPath', 'admin');
 define('ControllerREL', 'controllers/');

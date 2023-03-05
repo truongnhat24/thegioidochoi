@@ -12,17 +12,17 @@ class login_controller extends vendor_main_controller {
 	
 	public function index() {
 		if(isset($_POST['btn_submit'])) {
-			$user = $_POST['user'];
+			$user = $_POST['data']['login'];
 			$auth = vendor_auth_model::getInstance();
 			if($auth->login($user)) {
-				header("Location: ".vendor_app_util::url(['ctl'=>'dashboard']));
+				header("Location: ".vendor_app_util::url(['area' => 'admin', 'ctl'=>'dashboard']));
 			} else {
 				$this->errors = ['message'=>'Can not login with your account!'];
 			}
 		}
 		$this->display();
 	}
-	
+
 	public function logout() {
 		session_unset(); 
 		session_destroy(); 

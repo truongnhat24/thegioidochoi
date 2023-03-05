@@ -55,13 +55,13 @@
                                     welcome,
                                     <a class="text-warning" href="<?php echo vendor_app_util::url(['ctl' => 'users']); ?>"><?php echo $_SESSION['auth']['name'] ?></a>
                                 </span>
-                                <a href="<?php echo vendor_app_util::url(['ctl' => 'users', 'act' => 'logout']); ?>" class="btn btn-custom-auth text-dark">Logout</a>
+                                <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'logout']); ?>" class="btn btn-custom-auth text-dark">Logout</a>
                                 <?php if ($_SESSION['auth']['roles'] == '1') { ?>
                                     <a href="<?php echo vendor_app_util::url(['area' => 'admin', 'ctl' => 'login']); ?>" class="btn btn-custom-auth text-dark ms-2">Admin Login</a>
                                 <?php } ?>
                             <?php } else { ?>
                                 <a href="<?php echo vendor_app_util::url(['ctl' => 'login']); ?>" class="btn btn-custom-auth text-dark">Login</a>
-                                <a href="<?php echo vendor_app_util::url(['ctl' => 'users', 'act' => 'signup']); ?>" class="btn btn-custom-auth text-dark ms-2">Sign up</a>
+                                <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'signup']); ?>" class="btn btn-custom-auth text-dark ms-2">Sign up</a>
                             <?php } ?>
                         </div>
                     </div>

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="media/css/users.css">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="<?php echo MediaURI ?>css/users.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Login</h2>
+                                <h2 class="text-uppercase text-center mb-5">Sign Up</h2>
 
                                 <?php
                                 $params = (isset($this->record)) ? array('id' => $this->record['id']) : '';
@@ -29,6 +29,7 @@
                                 <form name="register-form" method="POST" action="<?php echo vendor_app_util::url(
                                                                                         array(
                                                                                             'ctl' => 'login',
+                                                                                            'act' => 'signup',
                                                                                             'params' => $params
                                                                                         )
                                                                                     ); ?>" class="mb-md-5 mt-md-4 pb-5 form-register">
@@ -37,6 +38,18 @@
                                             <p><?php echo $this->errors['message'] ?></p>
                                         </div>
                                     <?php } ?>
+
+                                    <div class="form-outline">
+                                        <input name="data[<?php echo $this->controller; ?>][name]" type="text" id="name" class="form-control form-control-lg" require />
+                                        <label class="form-label" for="name">Name</label>
+                                    </div>
+                                    <p class="mb-4 error name-error"></p>
+
+                                    <div class="form-outline">
+                                        <input name="data[<?php echo $this->controller; ?>][username]" type="text" id="username" class="form-control form-control-lg" require />
+                                        <label class="form-label" for="username">Username</label>
+                                    </div>
+                                    <p class="mb-4 error username-error"></p>
 
                                     <div class="form-outline">
                                         <input name="data[<?php echo $this->controller; ?>][email]" type="email" id="email" class="form-control form-control-lg" require />
@@ -51,14 +64,14 @@
                                     <p class="mb-4 error password-error"></p>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" name="btn_submit">
-                                            Login
+                                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" name="submit">
+                                            Sign up
                                         </button>
                                     </div>
 
-                                    <p class="text-center text-muted mt-5 mb-0">Don't have an account?
-                                        <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'signup']); ?>" class="fw-bold text-body">
-                                            Create an account
+                                    <p class="text-center text-muted mt-5 mb-0">Have already an account?
+                                        <a href="<?php echo vendor_app_util::url(['ctl' => 'login']); ?>" class="fw-bold text-body">
+                                            Login
                                         </a>
                                     </p>
 
@@ -71,9 +84,6 @@
             </div>
         </div>
     </section>
-
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
 </body>
-
 </html>

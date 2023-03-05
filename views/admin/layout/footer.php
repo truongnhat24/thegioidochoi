@@ -8,7 +8,8 @@
     reserved.
   </footer>
 
-  <div class="control-sidebar-bg"></div>
+  <aside class="control-sidebar control-sidebar-dark"></aside>
+  
 </div>
 <!-- ./wrapper -->
 
@@ -56,10 +57,10 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<script src="<?php echo LibsURI; ?>js/jquery.min.js"></script>
-<script src="<?php echo LibsURI; ?>bootstrap-4.6.0/js/bootstrap.bundle.min.js"></script>
-<script src="<?php echo MediaURI; ?>admin/js/adminlte.min.js"></script>
-<script src="<?php echo MediaURI; ?>admin/js/main.js"></script>
+<script src="<?php echo VendorURI; ?>almasaeed2010/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="<?php echo LibsURI; ?>bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo VendorURI; ?>almasaeed2010/adminlte/dist/js/adminlte.min.js"></script>
+
 <?php echo vendor_html_helper::_jsFooter(); ?>
 </body>
 </html>

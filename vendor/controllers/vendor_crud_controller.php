@@ -1,6 +1,8 @@
 <?php
 class vendor_crud_controller extends vendor_main_controller {
 	public function  __construct() {
+		//var_dump("cccccc"); exit();
+
 		global $app;
 		$this->controller = $app['ctl'];
 		if(isset($app['act'])) $this->action = $app['act'];

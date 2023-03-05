@@ -1,27 +1,32 @@
 <?php
 //class users_controller extends vendor_crud_controller {
 class users_controller extends vendor_backend_controller {
+	protected $um;
+
+	public function __construct() {
+		$this->um = user_model::getInstance();
+		parent::__construct();
+	}
+
 	public function index() {
 		global $app;
+		//var_dump($_SESSION['auth']['roles']); exit();
 		$conditions = "";
-		if(isset($app['prs']['status'])) {
-			$conditions .= "status=".$app['prs']['status'];
-		}
 		if(isset($app['prs']['role'])) {
 			$conditions .= (($conditions)? " AND ":"")."role=".$app['prs']['role'];
 		}
-		if(isset($app['prs']['kw'])) {
-			$conditions .= (($conditions)? " AND (":"")."firstname LIKE '%".$app['prs']['kw']."%' OR lastname LIKE '%".$app['prs']['kw']."%' OR email LIKE '%".$app['prs']['kw']."%'".(($conditions)? ")":"");
-		}
+		//var_dump($conditions); exit();
+		// if(isset($app['prs']['kw'])) {
+		// 	$conditions .= (($conditions)? " AND (":"")."firstname LIKE '%".$app['prs']['kw']."%' OR lastname LIKE '%".$app['prs']['kw']."%' OR email LIKE '%".$app['prs']['kw']."%'".(($conditions)? ")":"");
+		// }
 		
-        $um = user_model::getInstance();
-		$this->records = $um->allp('*',['conditions'=>$conditions, 'joins'=>false]);
+        // $um = user_model::getInstance();
+		$this->records = $this->um->allp('*',['conditions'=>$conditions, 'joins'=>false]);
 		$this->display();
 	}
 
 	public function view($id) {
-    $um = user_model::getInstance();
-		$this->record = $um->getRecord($id);
+		$this->records = $this->um->getRecord($id);
 		$this->display();
 	}
 
