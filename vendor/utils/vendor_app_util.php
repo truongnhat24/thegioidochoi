@@ -1,35 +1,5 @@
 <?php
 class vendor_app_util {
-	public static function urll($options=null) {
-		if($options=='/')
-			return 'index.php';
-			
-		global $app;
-		if(!isset($options['area'])) {
-			if($app["area"] == 'users')
-				$options['area'] = ''; //*
-			else $options['area'] = $app["area"].'/';
-		} else {
-			$options['area'] = ($options['area'])? $options['area'].'/': '';
-		}
-		if(!isset($options['ctl'])) {
-			$options['ctl'] = $app["ctl"];
-		}  //ctl = login
-		$act = '';
-		if(isset($options['act'])) {
-			$act = '/'.$options['act'];
-			//$options['act'] = $app['act'];
-		}
-		$params = '';
-		if(isset($options['params']) and $options['params']) {
-			foreach($options['params'] as $k=>$v) {
-				$params .= (is_numeric($k))? '/'.$v: '/'.$k.'='.$v;
-
-			}
-		}
-		return RootREL.$options['area'].$options['ctl'].$act.$params; ///thegioidochoi/login
-	}
-
 	public static function url($options=null) {
 		if($options=='/')
 			return 'index.php';

@@ -7,7 +7,6 @@
     <meta name="description" content="softdevelopinc">
     <meta name="author" content="softdevelopinc@gmail.com">
 
-    <!--link rel="stylesheet" href="<?php echo LibsURI; ?>bootstrap/css/bootstrap.min.css"-->
     <link rel="stylesheet" href="<?php echo LibsURI; ?>/fontawesome/css/all.min.css">
   	<link rel="stylesheet" href="<?php echo MediaURI;?>admin/css/admin.css">
   	<!-- Google Font -->

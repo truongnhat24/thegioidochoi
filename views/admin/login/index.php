@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="media/css/users.css">
-    <link rel="stylesheet" href="media/admin/css/admin.css">
+    <link rel="stylesheet" href="<?php echo MediaURI; ?>css/users.css">
+    <link rel="stylesheet" href="<?php echo MediaURI; ?>admin/css/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" /> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" /> 
@@ -84,11 +84,11 @@
     </section>
 
 
-    <script type="text/javascript" src="vendor/almasaeed2010/adminlte/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo VendorURI ?>almasaeed2010/adminlte/plugins/jquery/jquery.min.js"></script>
 
-    <script type="text/javascript" src="vendor/almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="<?php echo VendorURI ?>almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script type="text/javascript" src="vendor/almasaeed2010/adminlte/dist/js/adminlte.min.js?v=3.2.0"></script>
+    <script type="text/javascript" src="<?php echo VendorURI ?>almasaeed2010/adminlte/dist/js/adminlte.min.js?v=3.2.0"></script>
 </body>
 
 </html>

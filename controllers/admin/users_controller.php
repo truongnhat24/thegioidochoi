@@ -7,26 +7,25 @@ class users_controller extends vendor_backend_controller {
 		$this->um = user_model::getInstance();
 		parent::__construct();
 	}
-
+	
 	public function index() {
 		global $app;
-		//var_dump($_SESSION['auth']['roles']); exit();
 		$conditions = "";
 		if(isset($app['prs']['role'])) {
 			$conditions .= (($conditions)? " AND ":"")."role=".$app['prs']['role'];
 		}
-		//var_dump($conditions); exit();
 		// if(isset($app['prs']['kw'])) {
 		// 	$conditions .= (($conditions)? " AND (":"")."firstname LIKE '%".$app['prs']['kw']."%' OR lastname LIKE '%".$app['prs']['kw']."%' OR email LIKE '%".$app['prs']['kw']."%'".(($conditions)? ")":"");
 		// }
 		
-        // $um = user_model::getInstance();
 		$this->records = $this->um->allp('*',['conditions'=>$conditions, 'joins'=>false]);
+		// echo "<pre>";
+		// var_dump($this->records); exit();
 		$this->display();
 	}
 
 	public function view($id) {
-		$this->records = $this->um->getRecord($id);
+		$this->records = $this->um->profile();
 		$this->display();
 	}
 

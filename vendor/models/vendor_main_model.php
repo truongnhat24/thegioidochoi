@@ -2,10 +2,11 @@
 class vendor_main_model {
 	protected $con;
 	protected $table;
+	protected $relationships;
 	public $nopp = 20;
 	public $curp = 1;
 	public $errors = false;
-  private static $instance = [];  
+  	private static $instance = [];  
 
 	public function __construct(){
 		global $app;

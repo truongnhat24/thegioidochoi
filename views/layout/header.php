@@ -19,7 +19,7 @@
     <header class="bg-dark">
         <section class="container">
             <nav class="navbar navbar-expand-md navbar-info d-flex flex-column">
-                <div class="container-fluid">
+                <div class="container-fluid">   
                     <a class="navbar-brand logo" href="<?php echo vendor_app_util::url('/'); ?>">
                         <img src="media/img/logo.png" alt="logo">
                     </a>
@@ -37,9 +37,9 @@
                                     Products
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <?php foreach ($this->categories as $k) { ?>
-                                        <li><a class="dropdown-item" href="#"><?php echo $k; ?></a></li>
-                                    <?php } ?>
+                                    <?php foreach ($this->categories as $k=>$v): ?>
+                                        <li><a class="dropdown-item" href="#"><?php echo $v; ?></a></li>
+                                    <?php endforeach ?>
                                 </ul>
                             </li>
                         </ul>
@@ -50,19 +50,19 @@
                         </form>
 
                         <div class="btn-login-group me-3 ms-5 d-flex align-items-center">
-                            <?php if (!empty($_SESSION['auth'])) { ?>
-                                <span class="me-2 text-light d-block">
-                                    welcome,
-                                    <a class="text-warning" href="<?php echo vendor_app_util::url(['ctl' => 'users']); ?>"><?php echo $_SESSION['auth']['name'] ?></a>
-                                </span>
-                                <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'logout']); ?>" class="btn btn-custom-auth text-dark">Logout</a>
-                                <?php if ($_SESSION['auth']['roles'] == '1') { ?>
-                                    <a href="<?php echo vendor_app_util::url(['area' => 'admin', 'ctl' => 'login']); ?>" class="btn btn-custom-auth text-dark ms-2">Admin Login</a>
-                                <?php } ?>
-                            <?php } else { ?>
-                                <a href="<?php echo vendor_app_util::url(['ctl' => 'login']); ?>" class="btn btn-custom-auth text-dark">Login</a>
-                                <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'signup']); ?>" class="btn btn-custom-auth text-dark ms-2">Sign up</a>
-                            <?php } ?>
+                            <?php if (!empty($_SESSION['auth'])): ?>
+                                    <span class="me-2 text-light d-block">
+                                        welcome,
+                                        <a class="text-warning" href="<?php echo vendor_app_util::url(['ctl' => 'users']); ?>"><?php echo $_SESSION['auth']['name'] ?></a>
+                                    </span>
+                                    <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'logout']); ?>" class="btn btn-custom-auth text-dark">Logout</a>
+                                    <?php if ($_SESSION['auth']['roles'] == '1'): ?>
+                                        <a href="<?php echo vendor_app_util::url(['area' => 'admin', 'ctl' => 'login']); ?>" class="btn btn-custom-auth text-dark ms-2">Admin Login</a>
+                                    <?php endif ?>
+                                <?php  else : ?>
+                                    <a href="<?php echo vendor_app_util::url(['ctl' => 'login']); ?>" class="btn btn-custom-auth text-dark">Login</a>
+                                    <a href="<?php echo vendor_app_util::url(['ctl' => 'login', 'act' => 'signup']); ?>" class="btn btn-custom-auth text-dark ms-2">Sign up</a>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>

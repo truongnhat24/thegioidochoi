@@ -1,6 +1,7 @@
 <?php
 class login_controller extends vendor_main_controller {
 	protected 	$errors = false;
+	protected 	$um;
 	public function __construct() {
 		parent::__construct();
 	}
@@ -18,21 +19,21 @@ class login_controller extends vendor_main_controller {
 		}
 		$this->display();
 	}
-
+	
 	public function signup() {
-		//var_dump("cccc"); exit();
+		$this->um = new user_model();
 		if(isset($_POST['btn_submit'])) {
 			$user = $_POST['data']['login'];
-			$auth = vendor_auth_model::getInstance();
-			if($auth->login($user)) {
-				header("Location: ".vendor_app_util::url(['ctl'=>'login']));
+			if(!empty($user['username'])) {
+				if ($this->um->addRecord($user)){
+					header("Location: ".vendor_app_util::url(['ctl'=>'login']));
+				}
 			} else {
 				$this->errors = ['message'=>'Can not sign up!'];
 			}
 		}
 		$this->display();
 	}
-	
 	
 	public function logout() {
 		session_unset(); 

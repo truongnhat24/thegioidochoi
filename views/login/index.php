@@ -23,7 +23,7 @@
                                 <h2 class="text-uppercase text-center mb-5">Login</h2>
 
                                 <?php
-                                $params = (isset($this->record)) ? array('id' => $this->record['id']) : '';
+                                    $params = (isset($this->record)) ? array('id' => $this->record['id']) : '';
                                 ?>
 
                                 <form name="register-form" method="POST" action="<?php echo vendor_app_util::url(
@@ -32,11 +32,11 @@
                                                                                             'params' => $params
                                                                                         )
                                                                                     ); ?>" class="mb-md-5 mt-md-4 pb-5 form-register">
-                                    <?php if ($this->errors) { ?>
+                                    <?php if ($this->errors): ?>
                                         <div class="message error validation_errors">
                                             <p><?php echo $this->errors['message'] ?></p>
                                         </div>
-                                    <?php } ?>
+                                    <?php endif ?>
 
                                     <div class="form-outline">
                                         <input name="data[<?php echo $this->controller; ?>][email]" type="email" id="email" class="form-control form-control-lg" require />

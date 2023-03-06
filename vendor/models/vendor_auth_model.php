@@ -8,7 +8,7 @@ class vendor_auth_model extends vendor_main_model {
 			$password = vendor_app_util::generatePassword($user['password']);
 			$result = $um->getRecordWhere([
 				'email' => $email,
-				//'status' => 1,
+				'status' => 1,
 				'password' => $password
 			]);
 		}

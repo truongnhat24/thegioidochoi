@@ -33,11 +33,11 @@
                                                                                             'params' => $params
                                                                                         )
                                                                                     ); ?>" class="mb-md-5 mt-md-4 pb-5 form-register">
-                                    <?php if ($this->errors) { ?>
+                                    <?php if ($this->errors): ?>
                                         <div class="message error validation_errors">
                                             <p><?php echo $this->errors['message'] ?></p>
                                         </div>
-                                    <?php } ?>
+                                    <?php endif ?>
 
                                     <div class="form-outline">
                                         <input name="data[<?php echo $this->controller; ?>][name]" type="text" id="name" class="form-control form-control-lg" require />
@@ -64,7 +64,7 @@
                                     <p class="mb-4 error password-error"></p>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" name="submit">
+                                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" name="btn_submit">
                                             Sign up
                                         </button>
                                     </div>

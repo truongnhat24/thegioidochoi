@@ -14,7 +14,6 @@ class vendor_main_controller {
 	protected 	$records;
 
 	public function  __construct() {
-		//var_dump("cccccc"); exit();
 		global $app;
 		$this->controller = $app['ctl'];
 		if(isset($app['act'])) $this->action = $app['act'];

@@ -1,5 +1,5 @@
 <?php global $mediaFiles; ?>
-<?php array_push($mediaFiles['css'], MediaURI ."admin/css/user.css");?>
+<?php array_push($mediaFiles['css'], MediaURI . "admin/css/user.css"); ?>
 <?php include_once 'views/admin/layout/' . $this->layout . 'top.php'; ?>
 
 <!-- Content Header (Page header) -->
@@ -12,11 +12,11 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?php echo vendor_app_util::url(
-                                        array(
-                                            'area' => 'admin',
-                                            'ctl' => 'dashboard'
-                                        )
-                                    ); ?>">Home</a></li>
+                                                                array(
+                                                                    'area' => 'admin',
+                                                                    'ctl' => 'dashboard'
+                                                                )
+                                                            ); ?>">Home</a></li>
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </div>
@@ -66,56 +66,64 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            <a>
-                                1
-                            </a>
-                        </td>
-                        <td>
-                            <span>ABC</span>
-                            <br>
-                            <small>
-                                Created 01.01.2019
-                            </small>                            
-                        </td>
-                        <td class="project_progress">    
-                            <span>123@gmail.com</span>
-                            <br>                    
-                            <small>
-                                0123456789
-                            </small>
-                        </td>
-                        <td>
-                            <img class="img-user-dash" src="<?php echo MediaURI; ?>upload/users/avatar_default.png" alt="">
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Admin</span>
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Enable</span>
-                        </td>
-                        <td class="project-actions text-right">
-                            <a class="btn btn-primary btn-sm" href="#">
-                                <i class="fas fa-folder">
-                                </i>
-                                View
-                            </a>
-                            <a class="btn btn-info btn-sm" href="#">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
-                            </a>
-                            <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
-                                </i>
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
+                    <?php foreach ($this->records['data'] as $user) : ?>
+                        <tr>
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                <a>
+                                    <?php echo $user['id']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <span><?php echo $user['name']; ?></span>
+                                <br>
+                                <small>
+                                    Created <?php echo $user['created']; ?>
+                                </small>
+                            </td>
+                            <td class="project_progress">
+                                <span><?php echo $user['email']; ?></span>
+                                <br>
+                                <small>
+                                    <?php echo $user['phone']; ?>
+                                </small>
+                            </td>
+                            <td>
+                                <img class="img-user-dash" src="<?php echo MediaURI . 'upload/users/' . $user['image']; ?>" alt="">
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success"><?php echo ($user['roles'] == '1') ? 'Admin' : 'User'; ?></span>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success"><?php echo ($user['status'] == '1') ? 'Enable' : 'Disable'; ?></span>
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href="<?php echo vendor_app_util::url(
+                                                                            array(
+                                                                                'area' => 'admin',
+                                                                                'ctl' => 'users',
+                                                                                'act' => 'view'
+                                                                            )
+                                                                        ); ?>">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="#">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="#">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

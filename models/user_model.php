@@ -22,6 +22,8 @@ class user_model extends vendor_frap_model {
 
 	public function addRecord($datas) {
 		$datas['password'] = md5($datas['password']);
+		$datas['status'] = 1;
+		$datas['roles'] = 0;
 		$datas['image'] = 'avatar_default.png';
 		return parent::addRecord($datas);
 	}
@@ -129,7 +131,5 @@ class user_model extends vendor_frap_model {
 		} else $record=false;
 		return $record;
 	}
-}
-?>
 }
 ?>
