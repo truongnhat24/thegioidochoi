@@ -17,7 +17,7 @@
                                                                     'ctl' => 'dashboard'
                                                                 )
                                                             ); ?>">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">Users</li>
                 </ol>
             </div>
         </div>
@@ -28,15 +28,49 @@
 <!-- Main content -->
 <section class="content">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <h3 class="card-title">Users</h3>
+
+            <div class="form-inline flex-grow-1 justify-content-center search-user">
+                <div class="input-group">
+                    <input class="form-control form-control-sidebar search-input" type="search" placeholder="Search" alt="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar search-btn" alt="<?php echo vendor_app_util::url(
+                                                                            array(
+                                                                                'area' => 'admin',
+                                                                                'ctl' => 'users',
+                                                                                'act' => 'search',
+                                                                            )
+                                                                        ); ?>">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-sidebar filter-btn" alt="filter">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-tools">
+                <a class="btn btn-info btn-sm" href="<?php echo vendor_app_util::url(
+                                                            array(
+                                                                'area' => 'admin',
+                                                                'ctl' => 'users',
+                                                                'act' => 'add',
+                                                            )
+                                                        ); ?>">
+                    <i class="fas fa-plus">
+                    </i>
+                    Add user
+                </a>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
             </div>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body">
             <table class="table table-striped projects">
                 <thead>
                     <tr>
@@ -91,7 +125,11 @@
                                 </small>
                             </td>
                             <td>
-                                <img class="img-user-dash" src="<?php echo MediaURI . 'upload/users/' . $user['image']; ?>" alt="">
+                                <img class="img-user-dash" src="<?php if (is_null($user['image'])) {
+                                                                    echo MediaURI . 'upload/users/avatar_default.png';
+                                                                } else {
+                                                                    echo MediaURI . 'upload/users/' . $user['image'];
+                                                                } ?>" alt="">
                             </td>
                             <td class="project-state">
                                 <span class="badge badge-success"><?php echo ($user['roles'] == '1') ? 'Admin' : 'User'; ?></span>
@@ -104,14 +142,20 @@
                                                                             array(
                                                                                 'area' => 'admin',
                                                                                 'ctl' => 'users',
-                                                                                'act' => 'view'
+                                                                                'act' => 'view/' . $user['id'],
                                                                             )
                                                                         ); ?>">
                                     <i class="fas fa-folder">
                                     </i>
                                     View
                                 </a>
-                                <a class="btn btn-info btn-sm" href="#">
+                                <a class="btn btn-info btn-sm" href="<?php echo vendor_app_util::url(
+                                                                            array(
+                                                                                'area' => 'admin',
+                                                                                'ctl' => 'users',
+                                                                                'act' => 'edit/' . $user['id'],
+                                                                            )
+                                                                        ); ?>">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit
@@ -133,5 +177,8 @@
 </section>
 
 </div>
+
+<?php global $mediaFiles; ?>
+<?php array_push($mediaFiles['js'], MediaURI . "admin/js/search.js"); ?>
 
 <?php include_once 'views/admin/layout/' . $this->layout . 'footer.php'; ?>

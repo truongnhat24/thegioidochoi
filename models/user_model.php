@@ -1,45 +1,5 @@
 <?php
 class user_model extends vendor_frap_model {
-
-	public function __construct()
-	{		
-		return parent::__construct();
-	}
-	public function createTable() {
-		// sql to create table
-		$sql = "CREATE TABLE users (
-			id 			INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			username			TEXT(255)    NOT NULL,
-			nickname			VARCHAR(255) NOT NULL,
-			email				VARCHAR(555) NOT NULL,
-			password		    VARCHAR(555) NOT NULL,
-			created         	DATETIME	 NOT NUll,
-		)";
-
-		$result = $this->con->query($sql);
-		return $result;
-	}
-
-	public function addRecord($datas) {
-		$datas['password'] = md5($datas['password']);
-		$datas['status'] = 1;
-		$datas['roles'] = 0;
-		$datas['image'] = 'avatar_default.png';
-		return parent::addRecord($datas);
-	}
-
-	public function loginData($user) {
-		$loginPass = md5($user['password']);
-		$loginEmail = $user['email'];
-		$query = "SELECT * FROM $this->table where email = '$loginEmail' and password = '$loginPass'";
-		$result = mysqli_query($this->con,$query);
-		
-		if($result) {
-			$record = mysqli_fetch_assoc($result);
-		} else $record=false;
-		return $record;
-	}
-
 	public $nopp = 10;
 	public static $avatUrl = UploadREL."users/";
 	public static $status = [
@@ -71,6 +31,39 @@ class user_model extends vendor_frap_model {
 	    ];
 	}
 
+	public function createTable() {
+		// sql to create table
+		$sql = "CREATE TABLE users (
+			id 			INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			username			TEXT(255)    NOT NULL,
+			nickname			VARCHAR(255) NOT NULL,
+			email				VARCHAR(555) NOT NULL,
+			password		    VARCHAR(555) NOT NULL,
+			created         	DATETIME	 NOT NUll,
+		)";
+
+		$result = $this->con->query($sql);
+		return $result;
+	}
+
+	public function addRecord($datas) {
+		$datas['password'] = md5($datas['password']);
+		$datas['status'] = 1;
+		$datas['roles'] = 0;
+		return parent::addRecord($datas);
+	}
+
+	public function loginData($user) {
+		$loginPass = md5($user['password']);
+		$loginEmail = $user['email'];
+		$query = "SELECT * FROM $this->table where email = '$loginEmail' and password = '$loginPass'";
+		$result = mysqli_query($this->con,$query);
+		
+		if($result) {
+			$record = mysqli_fetch_assoc($result);
+		} else $record=false;
+		return $record;
+	}
 	public static function getAvataUrl() {
 		return RootURL.self::$avatUrl.$_SESSION['user']['avata'];
 	}
@@ -84,8 +77,7 @@ class user_model extends vendor_frap_model {
 		return ucfirst($user['firstname'])." ".ucfirst($user['lastname']);
 	}
 
-	public function getTopUser()
-	{
+	public function getTopUser() {
 		$rsAll = $this->getAllData();
 		$topUser = array();
 		for($id = 0; $id < NUM_TOP_USERS; $id++){
@@ -96,8 +88,7 @@ class user_model extends vendor_frap_model {
 		return $topUser;
 	}
 
-	public function getAllChangepass()
-	{
+	public function getAllChangepass() {
 		$email = ucfirst($_SESSION['user']['email']);
 		$sql = "SELECT `password` FROM `users` WHERE `email` = '".$email."'";
 		$result = $this->con->query($sql);
@@ -105,16 +96,14 @@ class user_model extends vendor_frap_model {
 		return $result;
 	}
 
-	public function checkOldPassword($password)
-	{
+	public function checkOldPassword($password) {
 		$email = ucfirst($_SESSION['user']['email']);
 		$sql = "SELECT COUNT(id) as total  FROM `users` WHERE `email` = '".$email."' AND `password` = '".$password."'";
 		$result = $this->con->query($sql);
 		return $result->fetch_assoc()['total'];
 	}
 
-	public function updatePassword($newpassword)
-	{
+	public function updatePassword($newpassword) {
 		$email = ucfirst($_SESSION['user']['email']);
 		$sql = "UPDATE users SET password='$newpassword' WHERE `email` = '".$email."'";
 		$result = $this->con->query($sql);
@@ -122,7 +111,7 @@ class user_model extends vendor_frap_model {
 		return $result;
 	}
 	
-	public function profile(){
+	public function profile() {
 		$email = ucfirst($_SESSION['user']['email']);
 		$sql = "SELECT * FROM `users` WHERE `email` = '".$email."'";
 		$result = $this->con->query($sql);

@@ -23,7 +23,7 @@
                                                                     'ctl' => 'users'
                                                                 )
                                                             ); ?>">Users</a></li>
-                    <li class="breadcrumb-item active">View</li>
+                    <li class="breadcrumb-item active">Edit</li>
                 </ol>
             </div>
         </div>
@@ -44,65 +44,70 @@
         </div>
         <div class="card-body">
             <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="<?php echo vendor_app_util::url(
+                                                                                                        array(
+                                                                                                            'area' => 'admin',
+                                                                                                            'ctl' => 'users',
+                                                                                                            'act' => 'add',
+                                                                                                        )
+                                                                                                    ); ?>">
                     <div class="form-group row">
                         <label for="nameProfile" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nameProfile" placeholder="Name" value="<?php echo $this->records['name']; ?>" readonly>
+                            <input name="data[<?php echo $this->controller; ?>][name]" type="text" class="form-control" id="nameProfile" placeholder="Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="emailProfile" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="emailProfile" placeholder="Email" value="<?php echo $this->records['email']; ?>" readonly>
+                            <input name="data[<?php echo $this->controller; ?>][email]" type="email" class="form-control" id="emailProfile" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="usernameProfile" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="usernameProfile" placeholder="Username" value="<?php echo $this->records['username']; ?>" readonly>
+                            <input name="data[<?php echo $this->controller; ?>][username]" type="text" class="form-control" id="usernameProfile" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="passwordProfile" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input name="data[<?php echo $this->controller; ?>][password]" type="password" class="form-control" id="passwordProfile" placeholder="Password">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="roleProfile" class="col-sm-2 col-form-label">Role</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="roleProfile" placeholder="Role" value="<?php echo $this->records['roles']; ?>" readonly>
+                            <input name="data[<?php echo $this->controller; ?>][roles]" type="number" class="form-control" id="roleProfile" placeholder="Role">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="statusProfile" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="statusProfile" placeholder="Status" value="<?php echo $this->records['status']; ?>" readonly>
+                            <input name="data[<?php echo $this->controller; ?>][status]" type="number" class="form-control" id="statusProfile" placeholder="Status">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="phoneProfile" class="col-sm-2 col-form-label">Phone</label>
                         <div class="col-sm-10">
-                            <input type="tel" class="form-control" id="phoneProfile" placeholder="Phone" value="<?php echo $this->records['phone']; ?>" readonly>
+                            <input name="data[<?php echo $this->controller; ?>][phone]" type="phone" class="form-control" id="phoneProfile" placeholder="Phone">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="imageProfile" class="col-sm-2 col-form-label">Image</label>
-                        <div class="col-sm-10">
-                            <img id="imageProfile" src="<?php if (is_null($this->records['image'])) {
-                                                            echo MediaURI . 'upload/users/avatar_default.png';
-                                                        } else {
-                                                            echo MediaURI . 'upload/users/' . $this->records['image'];
-                                                        } ?>" alt="" class="img-thumbnail">
+                        <label for="imageEdit" class="col-sm-2 col-form-label">Image</label>
+                        <div class="col-sm-10 image-upload">
+                            <input name="image" type="file" class="form-control" id="imageEdit" placeholder="image">
+                            <img src="<?php if (is_null($this->records['image'])) {
+                                            echo MediaURI . 'img/avatar_default.png';
+                                        } else {
+                                            echo MediaURI . 'upload/users/' . $this->records['image'];
+                                        } ?>" alt="avatar" class="img-thumbnail profile-image mt-2">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                            <a class="btn btn-danger" href="<?php echo vendor_app_util::url(
-                                                                array(
-                                                                    'area' => 'admin',
-                                                                    'ctl' => 'users',
-                                                                    'act' => 'edit/' . $this->records['id'],
-                                                                )
-                                                            ); ?>">
-                                Edit
-                            </a>
+                            <button name="btn_submit" type="submit" class="btn btn-danger">Edit</button>
                         </div>
                     </div>
                 </form>
@@ -112,5 +117,7 @@
 </section>
 
 </div>
+<?php global $mediaFiles; ?>
+<?php array_push($mediaFiles['js'], MediaURI . "js/form.js"); ?>
 
 <?php include_once 'views/admin/layout/' . $this->layout . 'footer.php'; ?>

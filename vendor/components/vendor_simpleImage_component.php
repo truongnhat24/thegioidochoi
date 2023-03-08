@@ -54,6 +54,8 @@ class vendor_simpleImage_component {
 	}
  
 	function resize($nw,$nh) {
+		$nh = (int)$nh;
+		$nw = (int)$nw;
 		$this->new_image = imagecreatetruecolor($nw,$nh);
 		$color = imagecolorallocatealpha($this->new_image, 0, 0, 0, 127); 	//	Tranperant
 		imagefill($this->new_image, 0, 0, $color);

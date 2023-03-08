@@ -2,6 +2,7 @@
 //class users_controller extends vendor_crud_controller {
 class users_controller extends vendor_backend_controller {
 	protected $um;
+	protected $errors;
 
 	public function __construct() {
 		$this->um = user_model::getInstance();
@@ -25,27 +26,26 @@ class users_controller extends vendor_backend_controller {
 	}
 
 	public function view($id) {
-		$this->records = $this->um->profile();
+		$this->records = $this->um->getRecord($id); 
 		$this->display();
 	}
 
 	public function add() {
 		if(isset($_POST['btn_submit'])) {
-        $um = user_model::getInstance();
 			$userData = $_POST['user'];
 			if($_FILES['image']['tmp_name'])
 				$userData['avata'] = $this->uploadImg($_FILES);
-			$valid = $um->validator($userData);
+			$valid = $this->um->validator($userData);
 			if($valid['status']) {
 				$userData['password'] = vendor_app_util::generatePassword($userData['password']);
-				if($um->addRecord($userData))
+				if($this->um->addRecord($userData))
 					header("Location: ".vendor_app_util::url(["ctl"=>"users"]));
 				else {
 					$this->errors = ['database'=>'An error occurred when inserting data!'];
 					$this->record = $userData;
 				}
 			} else {
-				$this->errors = $um::convertErrorMessage($valid['message']);
+				$this->errors = $this->um::convertErrorMessage($valid['message']);
 				$this->record = $userData;
 			}
 		}
@@ -53,34 +53,33 @@ class users_controller extends vendor_backend_controller {
 	}
 
 	public function edit($id) {
-    $um = user_model::getInstance();
-		$this->record = $um->one($id);
+		$this->records = $this->um->one($id);
 		if(isset($_POST['btn_submit'])) {
-			$userData = $_POST['user'];
-			if($_FILES['image']['tmp_name']) {
-				if($this->record['avata'] && file_exists(RootURI."/media/upload/" .$this->controller.'/'.$this->record['avata']))
-					unlink(RootURI."/media/upload/" .$this->controller.'/'.$this->record['avata']);
-				$userData['avata'] = $this->uploadImg($_FILES);
+			$userData = $_POST['data']['users'];
+			if($_FILES['image']['name']) {
+				if($this->records['image'] && file_exists(RootURI."/media/upload/" .$this->controller.'/'.$this->records['image']))
+					unlink(RootURI."/media/upload/" .$this->controller.'/'.$this->records['image']);
+				$userData['image'] = $this->uploadImg($_FILES);
 			}
 			
-			$valid = $um->validator($userData, $id);
+			$valid = $this->um->validator($userData, $id);
 			if($valid['status']){
+				
 				if($userData['password'])
 					$userData['password'] = vendor_app_util::generatePassword($userData['password']);
 				else
 					unset($userData['password']);
-
-
-				if($um->editRecord($id, $userData)) {
+				
+				if($this->um->editRecords($id, $userData)) {
 					header("Location: ".vendor_app_util::url(["ctl"=>"users"]));
 				} else {
 					$this->errors = ['database'=>'An error occurred when editing data!'];
-					$this->record = $userData;
+					$this->records = $userData;
 				}
 			} else {
-				$this->errors = $um::convertErrorMessage($valid['message']);
-				$this->record = $userData;
-				$this->record['id'] = $id;
+				$this->errors = $this->um::convertErrorMessage($valid['message']);
+				$this->records = $userData;
+				$this->records['id'] = $id;
 			}
 		}
 		$this->display();
@@ -146,7 +145,6 @@ class users_controller extends vendor_backend_controller {
 	}
 
 	public function search_users(){
-        $um = user_model::getInstance();
 		$conditions  = "";
 		$search_term = isset($_GET['q']) ? $_GET['q'] : '';
 		$conditions .= " role in (1,2,3,4,5)";
@@ -160,12 +158,16 @@ class users_controller extends vendor_backend_controller {
 			'conditions' => $conditions,
 			'order' => 'firstname ASC',
 		];
-		$result = $um->allp('*',$options);
+		$result = $this->um->allp('*',$options);
 		$data['incomplete_results'] = false ;
 		$data['items'] = $result['data'];
 		$data['page'] = $result['curp'];
 		$data['total_count'] = $result['norecords'];
 		echo json_encode($data);
+	}
+
+	public function search() {
+		var_dump($_GET['content']);
 	}
 }
 ?>

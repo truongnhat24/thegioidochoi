@@ -27,3 +27,4 @@ class product_model extends vendor_frap_model
 		return $record;
 	}
 }
+?>

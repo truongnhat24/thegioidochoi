@@ -12,6 +12,7 @@ class vendor_main_controller {
 	protected 	$categories;
 	protected	$products;
 	protected 	$records;
+	protected 	$record;
 
 	public function  __construct() {
 		global $app;
@@ -139,6 +140,7 @@ class vendor_main_controller {
 					
 				}else{
 					if(isset($newSize['height']) && !isset($newSize['width'])) {
+						$newW = 200;
 						$simpleImg->resizeToHeight($newW);
 					} else {
 						$newW = DefaultImgW;

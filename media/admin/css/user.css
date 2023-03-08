@@ -1,5 +1,21 @@
  /* CUSTOM CSS */
 
- table tbody img.img-user-dash {
+ #imageProfile,
+ table tbody img.img-user-dash,
+ img.profile-image {
     width: 200px !important;
  }
+
+ input::file-selector-button {
+   position: relative;
+   top: -2px;
+   left: -4px;
+   font-weight: bold;
+   color: dodgerblue;
+   border: thin solid grey;
+   border-radius: 3px;
+}
+
+input::file-selector-button:hover {
+   cursor: pointer;
+}

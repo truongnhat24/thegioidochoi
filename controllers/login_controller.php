@@ -3,6 +3,7 @@ class login_controller extends vendor_main_controller {
 	protected 	$errors = false;
 	protected 	$um;
 	public function __construct() {
+		$this->um = user_model::getInstance();
 		parent::__construct();
 	}
 	
@@ -21,7 +22,6 @@ class login_controller extends vendor_main_controller {
 	}
 	
 	public function signup() {
-		$this->um = new user_model();
 		if(isset($_POST['btn_submit'])) {
 			$user = $_POST['data']['login'];
 			if(!empty($user['username'])) {
